@@ -23,14 +23,19 @@ jobs:
         with:
           deno-version: v2.x
 
-      - name: Build step
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install step
         run: "deno build"
 
       - name: Upload to Deno Deploy
         uses: denoland/deployctl@v1
         with:
           project: "bestproxy"
-          entrypoint: ".output/server/index.mjs"
+          entrypoint: "server/routes/index.ts"
           root: ""
           
           
